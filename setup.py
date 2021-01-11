@@ -10,6 +10,6 @@ setup(
     description='Python helpers for common ml tasks',
     url='https://github.com/lambdaofgod/mlutils',
     author='Jakub Bartczuk',
-    packages=find_packages(),
+    packages=find_packages(exclude=['test']),
     install_requires=requirements
 )
