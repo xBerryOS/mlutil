@@ -239,7 +239,7 @@ class PCREmbeddingVectorizer(EmbeddingVectorizer):
         return self.transform(texts)
 
     def _embed_texts(self, texts, **kwargs):
-        return np.vstack([self._embed_text(t, **kwargs) for t in texts])
+        return np.vstack([self._embed_text(t) for t in texts])
 
     @classmethod
     def _get_vectors_or_default(cls, word_embeddings, words, default=None):
@@ -263,8 +263,7 @@ class SIFEmbeddingVectorizer(PCREmbeddingVectorizer):
         smoothed_word_frequencies = self._get_smoothed_inverse_word_frequencies(filtered_words, self.count_vectorizer)
         return (word_vectors * smoothed_word_frequencies).sum(axis=0)
 
-    @classmethod
-    def _get_smoothed_inverse_word_frequencies(cls, words, count_vectorizer, eps=1e-8):
+    def _get_smoothed_inverse_word_frequencies(self, words, count_vectorizer, eps=1e-8):
         word_counts = count_vectorizer.transform(words).sum(axis=1)
         word_probabilities = 1.0 / (np.asarray(word_counts) + eps)
         return self.a / (self.a + word_probabilities)
