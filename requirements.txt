@@ -3,6 +3,6 @@ nltk
 pandas
 numpy
 tqdm
-sklearn
+scikit-learn
 pytest
 seaborn
